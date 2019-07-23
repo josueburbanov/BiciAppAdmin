@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BiciApp-Admin</string>
+    <string name="title_home">Reservas</string>
+    <string name="title_dashboard">Bicicletas</string>
+    <string name="title_notifications">Usuarios</string>
+
+</resources>
