@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
                 .get(ClienteViewModel.class);
 
         //Inicializacion de objetos EditText para tomar valores de la UI
-        EditText editTextUsuario = findViewById(R.id.editTextUsuario);
+        EditText editTextUsuario = findViewById(R.id.editTextDireccionE);
         EditText editTextContrasena = findViewById(R.id.editTextContrasena);
 
         //Llamada

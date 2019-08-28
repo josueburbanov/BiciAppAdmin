@@ -3,5 +3,27 @@
     <string name="title_home">Reservas</string>
     <string name="title_dashboard">Bicicletas</string>
     <string name="title_notifications">Usuarios</string>
+    <string name="title_estaciones">Estaciones</string>
+
+    <string name="menu_home">Crear Reserva</string>
+    <string name="menu_dashboard">Crear Bicicleta</string>
+    <string name="menu_notifications">Crear Usuario</string>
+    <string name="menu_estaciones">Crear Estación</string>
+
+    <string name="crear_usuario_nombre_hint">Nombre</string>
+    <string name="crear_usuario_nusuario_hint">Usuario</string>
+    <string name="crear_usuario_cedula_hint">Cédula</string>
+    <string name="crear_usuario_direccion_hint">Dirección</string>
+    <string name="crear_usuario_correo_hint">Correo</string>
+    <string name="crear_usuario_rfid_hint">RFID</string>
+    <string name="crear_usuario_telefono_hint">Telefono</string>
+    <string name="crear_usuario_button_title">Crear</string>
+    <string name="crear_usuario_title">Crear usuario</string>
+
+    <string name="crear_estacion_nombre_hint">Nombre</string>
+    <string name="crear_estacion_direccion_hint">Dirección</string>
+    <string name="crear_estacion_latitud_hint">Latitud</string>
+    <string name="crear_estacion_longitud_hint">Longitud</string>
+    <string name="crear_estacion_title">Crear estación</string>
 
 </resources>

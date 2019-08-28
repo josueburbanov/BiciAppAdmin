@@ -8,6 +8,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.annotation.NonNull;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import app.josueburbano.com.biciapp_admin.R;
@@ -36,6 +37,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new NotificationFragment()).commit();
                     return true;
+
+                    case R.id.navigation_estaciones:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                            new EstacionFragment()).commit();
+                    return true;
             }
             return false;
         }
@@ -62,6 +68,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.bottom_nav_menu, menu);
+        return true;
+    }
+
+    @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         NavigationView navigationView =(NavigationView) findViewById(R.id.nav_view);
         switch(menuItem.getItemId()){
@@ -79,6 +91,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigation_home: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new NuevaReserva()).commit();
+                break;
+            }
+            case R.id.navigation_dashboard: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new NuevaBicicleta()).commit();
+                break;
+            }
+            case R.id.navigation_notifications: {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new NuevoCliente()).commit();
+                break;
+            }
+            case R.id.navigation_estaciones:{
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new NuevaEstacion()).commit();
+                break;
+            }
+
+
+        }
         return true;
     }
 }
