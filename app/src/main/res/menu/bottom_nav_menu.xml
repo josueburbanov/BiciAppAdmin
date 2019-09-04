@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/navigation_home"
@@ -20,5 +21,12 @@
         android:id="@+id/navigation_estaciones"
         android:icon="@drawable/ic_whatshot_black_24dp"
         android:title="@string/menu_estaciones" />
+
+    <item
+        android:id="@+id/m_search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="@string/search_title"
+        app:actionLayout="@layout/search_view_layout"
+        app:showAsAction="ifRoom|collapseActionView" />
 
 </menu>

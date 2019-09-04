@@ -1,5 +1,7 @@
 package app.josueburbano.com.biciapp_admin.datos.modelos;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class Estacion implements Serializable {
@@ -48,5 +50,15 @@ public class Estacion implements Serializable {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getNombre()+" | "+getDireccion();
+    }
+
+    public String addInfo(){
+        return "Lat: "+getLatitud()+ " Long: "+getLongitud();
     }
 }

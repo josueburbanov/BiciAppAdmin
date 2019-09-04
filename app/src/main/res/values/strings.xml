@@ -25,5 +25,6 @@
     <string name="crear_estacion_latitud_hint">Latitud</string>
     <string name="crear_estacion_longitud_hint">Longitud</string>
     <string name="crear_estacion_title">Crear estación</string>
+    <string name="search_title">Búsqueda</string>
 
 </resources>
