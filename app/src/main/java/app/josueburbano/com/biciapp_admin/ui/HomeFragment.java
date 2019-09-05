@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,21 +44,30 @@ public class HomeFragment extends Fragment {
             public void onChanged(@Nullable List<Estacion> estaciones) {
                 if(estaciones != null){
                     fetchedEstaciones = estaciones;
-                    List<String> stringsList = new ArrayList<String>(fetchedEstaciones.size());
-                    List<String> addInfList = new ArrayList<String>(fetchedEstaciones.size());
-                    List<String> idsList = new ArrayList<String>(fetchedEstaciones.size());
-                    for (Estacion estacion : fetchedEstaciones) {
-                        stringsList.add(estacion.toString());
-                        addInfList.add(estacion.addInfo());
-                        idsList.add(estacion.getId());
 
-                    }
                     //instantiate custom adapter
-                    MyCustomAdapter adapter = new MyCustomAdapter(stringsList, addInfList, idsList, getActivity(),getActivity());
+                    //MyCustomAdapter adapter = new MyCustomAdapter(stringsList, addInfList, idsList, getActivity(),getActivity());
+                    MyCustomAdapter adapter = new MyCustomAdapter(getActivity(),getActivity());
+                    adapter.setList(fetchedEstaciones);
+                    adapter.setTypeKey(Estacion.class);
+                    try {
+                        adapter.prepareLists();
+                    } catch (NoSuchMethodException e) {
+                        e.printStackTrace();
+                    } catch (IllegalAccessException e) {
+                        e.printStackTrace();
+                    } catch (InvocationTargetException e) {
+                        e.printStackTrace();
+                    } catch (java.lang.InstantiationException e) {
+                        e.printStackTrace();
+                    }
 
                     //handle listview and assign adapter
-                    ListView lView = (ListView)getActivity().findViewById(R.id.lstView_reservas);
-                    lView.setAdapter(adapter);
+                    if(getActivity()!=null){
+                        ListView lView = (ListView)getActivity().findViewById(R.id.lstView_reservas);
+                        lView.setAdapter(adapter);
+                    }
+
                 }
 
             }

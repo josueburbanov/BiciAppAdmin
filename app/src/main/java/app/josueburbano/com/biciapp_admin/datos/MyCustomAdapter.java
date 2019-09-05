@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,9 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
 import app.josueburbano.com.biciapp_admin.R;
@@ -26,17 +30,38 @@ import app.josueburbano.com.biciapp_admin.datos.modelos.Estacion;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModel;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModelFactory;
 
-public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
-    private List<String> list;
-    private List<String> list2;
-    private List<String> ids;
+public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
+    private List<T> list;
     private Context context;
     private FragmentActivity activity;
+    private Class<T> typeKey;
+    List<String> list1;
+    List<String> list2;
+    List<String> list3;
 
-    public MyCustomAdapter(List<String> list,List<String> list2, List<String>ids, Context context, FragmentActivity activity) {
-        this.list = list;
-        this.list2 = list2;
-        this.ids = ids;
+    public void setList(List<T> t){
+        this.list = t;
+    }
+    public void setTypeKey(Class<T> typeKey){
+        this.typeKey = typeKey;
+    }
+    public void prepareLists() throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        list1 = new ArrayList<String>(list.size());
+        list2 = new ArrayList<String>(list.size());
+        list3 = new ArrayList<String>(list.size());
+
+        if(typeKey == Estacion.class){
+            for (T item : list) {
+                list1.add(item.toString());
+                Method addInfo = Estacion.class.getMethod("addInfo");
+                Method getId = Estacion.class.getMethod("getId");
+                list2.add((String) addInfo.invoke(item));
+                list3.add((String) getId.invoke(item));
+            }
+        }
+    }
+
+    public <T> MyCustomAdapter(Context context, FragmentActivity activity) {
         this.context = context;
         this.activity = activity;
     }
@@ -84,9 +109,10 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 //do something
-                showConfirmationBox("¿Seguro que desea eliminar el item?",context,ids.get(position));
+                showConfirmationBox("¿Seguro que desea eliminar el item?",context,list3.get(position), position);
                 //list.remove(position); //or some other task
                 //list2.remove(position);
+                //list3.remove(position);
                 notifyDataSetChanged();
             }
         });
@@ -101,7 +127,7 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
         return view;
     }
 
-    public void showConfirmationBox(String messageToShow, final Context context, final String item) {
+    public void showConfirmationBox(String messageToShow, final Context context, final String item, final int position) {
 
         // prepare the alert box
         AlertDialog.Builder alertbox = new AlertDialog.Builder(context);
@@ -118,7 +144,9 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
                         Toast.makeText(context,
                                 "'Yes' button clicked", Toast.LENGTH_SHORT)
                                 .show();
-                        RemoveEstacion(item);
+                        if (typeKey.equals(Estacion.class)){
+                            RemoveEstacion(item, position);
+                        }
                     }
                 });
 
@@ -137,7 +165,7 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
         alertbox.show();
     }
 
-    private void RemoveEstacion(String idItem) {
+    private void RemoveEstacion(String idItem, final int position) {
         EstacionViewModel viewModel= ViewModelProviders.of(activity, new EstacionViewModelFactory())
                 .get(EstacionViewModel.class);
         viewModel.EliminarEstacion(idItem);
@@ -148,6 +176,10 @@ public class MyCustomAdapter extends BaseAdapter implements ListAdapter {
                     if(confirmacion){
                     Toast.makeText(context, "Estación eliminada",
                             Toast.LENGTH_SHORT).show();
+                    list.remove(position);
+                    list2.remove(position);
+                    list3.remove(position);
+                    notifyDataSetChanged();
                 }
             }
             }
