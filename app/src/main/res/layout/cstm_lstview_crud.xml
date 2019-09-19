@@ -11,8 +11,9 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="32dp"
         android:background="?android:attr/selectableItemBackground"
+        android:contentDescription="TODO"
         android:src="@drawable/ic_delete_black_24dp"
-        android:contentDescription="TODO" />
+        android:tint="#7A7979" />
 
     <ImageButton
         android:id="@+id/edit_btn"
@@ -22,12 +23,14 @@
         android:layout_marginRight="10dp"
         android:layout_toLeftOf="@id/delete_btn"
         android:background="?android:attr/selectableItemBackground"
-        android:src="@drawable/ic_edit_black_24dp" />
+        android:backgroundTint="#796B6868"
+        android:src="@drawable/ic_edit_black_24dp"
+        android:tint="#727473" />
 
     <TextView
         android:id="@+id/list_item_string"
         android:layout_width="230dp"
-        android:layout_height="48dp"
+        android:layout_height="72dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
@@ -35,6 +38,7 @@
         android:layout_marginLeft="32dp"
         android:paddingLeft="8dp"
         android:text="default"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="16sp"
         android:textStyle="bold" />
 
@@ -47,11 +51,29 @@
         android:layout_alignParentLeft="true"
         android:layout_marginStart="33dp"
         android:layout_marginLeft="33dp"
-        android:layout_marginTop="-23dp"
-        android:layout_marginEnd="22dp"
+        android:layout_marginTop="-45dp"
+        android:layout_marginEnd="23dp"
         android:layout_toStartOf="@+id/edit_btn"
         android:paddingLeft="8dp"
-        android:text="default" />
+        android:text="default"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/list_item_string3"
+        android:layout_width="252dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/list_item_string"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="-21dp"
+        android:layout_marginEnd="23dp"
+        android:layout_toStartOf="@+id/edit_btn"
+        android:paddingLeft="8dp"
+        android:text="default"
+        android:textSize="13sp"
+        android:textStyle="italic" />
 
 
 </RelativeLayout>

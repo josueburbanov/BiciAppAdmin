@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
@@ -27,8 +29,6 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import app.josueburbano.com.biciapp_admin.R;
 import app.josueburbano.com.biciapp_admin.datos.modelos.Cliente;
@@ -45,19 +45,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             bnavView.getMenu().setGroupCheckable(0, true, true);
             switch (item.getItemId()) {
-                case R.id.navigation_home:
+                case R.id.navigation_reservas:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new HomeFragment()).commit();
+                            new ReservasFragment()).commit();
                     setHintSearchView("Reservas");
                     return true;
-                case R.id.navigation_dashboard:
+                case R.id.navigation_bicicletas:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new DashboardFragment()).commit();
+                            new BicicletasFragment()).commit();
                     setHintSearchView("Bicicletas");
                     return true;
-                case R.id.navigation_notifications:
+                case R.id.navigation_clientes:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new NotificationFragment()).commit();
+                            new ClientesFragment()).commit();
                     setHintSearchView("Clientes");
                     return true;
 
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mDrawerLayout = findViewById(R.id.drawer_layout);
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).commit();
+                new ReservasFragment()).commit();
 
         Intent intent = getIntent();
         clienteView = (Cliente) intent.getSerializableExtra(CLIENT_VIEW);
@@ -162,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch(menuItem.getItemId()){
             case R.id.nav_profile:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFragment()).commit();
+                        new ReservasFragment()).commit();
                 navigationView.getMenu().getItem(0).setChecked(true);
                 navigationView.getMenu().getItem(1).setChecked(false);
                 break;
@@ -181,19 +181,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onOptionsItemSelected(MenuItem item) {
         bnavView.getMenu().setGroupCheckable(0, true, true);
         switch (item.getItemId()) {
-            case R.id.navigation_home: {
+            case R.id.navigation_reservas: {
+                setHintSearchView("Reservas");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new NuevaReserva()).commit();
-                setHintSearchView("Reservas");
                 break;
             }
-            case R.id.navigation_dashboard: {
+            case R.id.navigation_bicicletas: {
                 setHintSearchView("Bicicletas");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new NuevaBicicleta()).commit();
                 break;
             }
-            case R.id.navigation_notifications: {
+            case R.id.navigation_clientes: {
                 setHintSearchView("Clientes");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new NuevoCliente()).commit();
@@ -201,8 +201,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
             case R.id.navigation_estaciones:{
                 setHintSearchView("Estaciones");
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new NuevaEstacion()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                  //      new NuevaEstacion()).commit();
+                CustomDialogEstacion cdd=new CustomDialogEstacion(this);
+                cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                cdd.show();
                 break;
             }
         }

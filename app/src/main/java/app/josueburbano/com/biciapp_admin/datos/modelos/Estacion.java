@@ -55,10 +55,13 @@ public class Estacion implements Serializable {
     @NonNull
     @Override
     public String toString() {
-        return getNombre()+" | "+getDireccion();
+        return getNombre();
     }
 
-    public String addInfo(){
+    public String addInfo2(){
         return "Lat: "+getLatitud()+ " Long: "+getLongitud();
+    }
+    public String addInfo1(){
+        return getDireccion();
     }
 }

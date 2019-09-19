@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import app.josueburbano.com.biciapp_admin.R;
 
-public class DashboardFragment extends Fragment {
+public class BicicletasFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

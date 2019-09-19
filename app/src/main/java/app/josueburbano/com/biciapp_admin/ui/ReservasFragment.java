@@ -10,10 +10,16 @@ import android.view.ViewGroup;
 
 import app.josueburbano.com.biciapp_admin.R;
 
-public class NotificationFragment extends Fragment {
+public class ReservasFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_notification, container, false);
+        return inflater.inflate(R.layout.fragment_reservas, container, false);
     }
+
+
+
+
+
+
 }

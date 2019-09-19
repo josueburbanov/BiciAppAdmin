@@ -1,6 +1,5 @@
 package app.josueburbano.com.biciapp_admin.datos;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
@@ -9,12 +8,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListAdapter;
 import android.widget.TextView;
@@ -38,6 +35,7 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
     List<String> list1;
     List<String> list2;
     List<String> list3;
+    List<String> list4;
 
     public void setList(List<T> t){
         this.list = t;
@@ -49,14 +47,17 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
         list1 = new ArrayList<String>(list.size());
         list2 = new ArrayList<String>(list.size());
         list3 = new ArrayList<String>(list.size());
+        list4 = new ArrayList<String>(list.size());
 
         if(typeKey == Estacion.class){
             for (T item : list) {
                 list1.add(item.toString());
-                Method addInfo = Estacion.class.getMethod("addInfo");
+                Method addInfo1 = Estacion.class.getMethod("addInfo1");
+                Method addInfo2 = Estacion.class.getMethod("addInfo2");
                 Method getId = Estacion.class.getMethod("getId");
-                list2.add((String) addInfo.invoke(item));
+                list2.add((String) addInfo1.invoke(item));
                 list3.add((String) getId.invoke(item));
+                list4.add((String) addInfo2.invoke(item));
             }
         }
     }
@@ -101,6 +102,9 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
         TextView listItemText2 = (TextView)view.findViewById(R.id.list_item_string2);
         listItemText2.setText(String.valueOf(list2.get(position)));
 
+        TextView listItemText3 = (TextView)view.findViewById(R.id.list_item_string3);
+        listItemText3.setText(String.valueOf(list4.get(position)));
+
         //Handle buttons and add onClickListeners
         ImageButton deleteBtn = (ImageButton)view.findViewById(R.id.delete_btn);
         ImageButton editBtn = (ImageButton)view.findViewById(R.id.edit_btn);
@@ -108,18 +112,13 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
         deleteBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //do something
                 showConfirmationBox("¿Seguro que desea eliminar el item?",context,list3.get(position), position);
-                //list.remove(position); //or some other task
-                //list2.remove(position);
-                //list3.remove(position);
                 notifyDataSetChanged();
             }
         });
         editBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                //do something
                 notifyDataSetChanged();
             }
         });
@@ -157,7 +156,6 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
             public void onClick(DialogInterface arg0, int arg1) {
                 Toast.makeText(context, "'No' button clicked",
                         Toast.LENGTH_SHORT).show();
-                //if (prov instanceof Estacion)NotRemoveItem();
             }
         });
 
@@ -180,6 +178,7 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
                     list2.remove(position);
                     list3.remove(position);
                     notifyDataSetChanged();
+
                 }
             }
             }

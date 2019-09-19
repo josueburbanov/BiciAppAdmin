@@ -20,10 +20,10 @@
     <string name="crear_usuario_button_title">Crear</string>
     <string name="crear_usuario_title">Crear usuario</string>
 
-    <string name="crear_estacion_nombre_hint">Nombre</string>
-    <string name="crear_estacion_direccion_hint">Dirección</string>
-    <string name="crear_estacion_latitud_hint">Latitud</string>
-    <string name="crear_estacion_longitud_hint">Longitud</string>
+    <string name="crear_estacion_nombre_hint">Seminario Mayor</string>
+    <string name="crear_estacion_direccion_hint">Av. América y Cristóbal Colón</string>
+    <string name="crear_estacion_latitud_hint">-0.78273</string>
+    <string name="crear_estacion_longitud_hint">-78.98087</string>
     <string name="crear_estacion_title">Crear estación</string>
     <string name="search_title">Búsqueda</string>
 
