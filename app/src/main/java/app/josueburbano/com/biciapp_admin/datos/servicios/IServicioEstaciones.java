@@ -10,6 +10,7 @@ import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface IServicioEstaciones {
@@ -21,5 +22,8 @@ public interface IServicioEstaciones {
 
     @DELETE("/EstacionesServicio.svc/estaciones/{idEstacion}")
     public Call<Boolean> eliminarEstacion(@Path("idEstacion")String idEstacion);
+
+    @PUT("/EstacionesServicio.svc/estaciones")
+    public Call<Boolean> editarEstacion(@Body JsonObject body);
 
 }

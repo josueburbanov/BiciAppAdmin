@@ -24,6 +24,10 @@ public class EstacionViewModel extends ViewModel {
     public void CrearEstacion(Estacion estacionCrear){
         estacion = estacionesRepo.crearReserva(estacionCrear);
     }
+    public void EditarEstacion(Estacion estacionEditar){
+        confirmacion = estacionesRepo.editarEstacion(estacionEditar);
+    }
+
     public void ObtenerEstaciones(){
         estaciones = estacionesRepo.obtenerEstaciones();
     }

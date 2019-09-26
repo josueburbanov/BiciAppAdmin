@@ -1,175 +1,213 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.NuevoCliente">
+    android:orientation="vertical"
+    tools:context=".ui.MainActivity"
+    android:background="@drawable/curve_shap">
 
-    <EditText
-        android:id="@+id/editTextLatitud"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="@string/crear_usuario_cedula_hint"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextLongitud"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDireccionE" />
-
-    <EditText
-        android:id="@+id/editTextCorreo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="@string/crear_usuario_correo_hint"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextRfid"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLongitud" />
-
-    <EditText
-        android:id="@+id/editTextTelefono"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:ems="10"
-        android:hint="@string/crear_usuario_telefono_hint"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCrearE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextRfid" />
-
-    <EditText
-        android:id="@+id/editTextRfid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="@string/crear_usuario_rfid_hint"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTelefono"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextCorreo" />
-
-    <EditText
-        android:id="@+id/editTextLongitud"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="@string/crear_usuario_direccion_hint"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextCorreo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLatitud" />
-
-    <EditText
-        android:id="@+id/editTextNombreE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="48dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="@string/crear_usuario_nombre_hint"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextDireccionE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
-
-    <EditText
-        android:id="@+id/editTextDireccionE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:ems="10"
-        android:hint="@string/crear_usuario_nusuario_hint"
-        android:inputType="textPersonName"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextLatitud"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNombreE" />
-
-    <Button
-        android:id="@+id/btnCrearE"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="64dp"
-        android:text="@string/crear_usuario_button_title"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTelefono" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/cardview_light_background"
+        android:gravity="center"
+        android:text="Crear Cliente"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/textViewTituloNombreCliente"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Nombre:"
+        android:textColor="@android:color/background_light"
+        android:paddingLeft="32dp"
+        android:paddingTop="64dp"
+        android:textStyle="bold"
+        android:layout_below="@id/textViewTitulo"/>
+
+        <EditText
+            android:id="@+id/editTextNombreCliente"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTituloNombreCliente"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/crear_usuario_nombre_hint"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textViewTituloUsrCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usuario:"
+        android:textColor="@android:color/background_light"
+        android:paddingLeft="32dp"
+        android:paddingTop="32dp"
+        android:textStyle="bold"
+        android:layout_below="@id/editTextNombreCliente"/>
+
+        <EditText
+            android:id="@+id/editTextNombreUsuario"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTituloUsrCliente"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/crear_usuario_nusuario_hint"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textViewTituloCedulaCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cédula:"
+        android:textColor="@android:color/background_light"
+        android:paddingLeft="32dp"
+        android:paddingTop="32dp"
+        android:textStyle="bold"
+        android:layout_below="@id/editTextNombreUsuario"/>
+
+
+        <EditText
+            android:id="@+id/editTextCedula"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTituloCedulaCliente"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/crear_usuario_cedula_hint"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textViewTituloCorreoCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Correo:"
+        android:textColor="@android:color/background_light"
+        android:paddingLeft="32dp"
+        android:paddingTop="32dp"
+        android:textStyle="bold"
+        android:layout_below="@id/editTextCedula"/>
+
+        <EditText
+            android:id="@+id/editTextCorreo"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTituloCorreoCliente"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/crear_usuario_correo_hint"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textViewTituloTelefonoCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Teléfono:"
+        android:textColor="@android:color/background_light"
+        android:paddingLeft="32dp"
+        android:paddingTop="32dp"
+        android:textStyle="bold"
+        android:layout_below="@id/editTextCorreo"/>
+
+        <EditText
+            android:id="@+id/editTextTelefono"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTituloTelefonoCliente"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/crear_usuario_telefono_hint"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textViewTituloRfidCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="RFID:"
+        android:textColor="@android:color/background_light"
+        android:paddingLeft="32dp"
+        android:paddingTop="32dp"
+        android:textStyle="bold"
+        android:layout_below="@id/editTextTelefono"/>
+
+        <EditText
+            android:id="@+id/editTextRfid"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTituloRfidCliente"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/crear_usuario_rfid_hint"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/textViewTitulDireccionCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dirección:"
+        android:textColor="@android:color/background_light"
+        android:paddingLeft="32dp"
+        android:paddingTop="32dp"
+        android:textStyle="bold"
+        android:layout_below="@id/editTextRfid"/>
+
+        <EditText
+            android:id="@+id/editTextDireccionCliente"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTitulDireccionCliente"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="@string/crear_usuario_direccion_hint"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+
+
+
+    <com.kusu.library.LoadingButton
+        android:id="@+id/btnCrearCliente"
+        android:layout_width="146dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="32dp"
         android:layout_marginRight="8dp"
-        android:text="@string/crear_usuario_title"
-        android:textColor="#009688"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNombreE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_marginBottom="32dp"
+        android:text="@string/crear_usuario_button_title"
+        android:textColor="@color/cardview_dark_background"
+        app:lb_buttonColor="#E0F2F1"
+        app:lb_isCircular="false"
+        app:lb_isShadowEnable="false"
+        android:layout_below="@id/editTextDireccionCliente"/>
+
+    </RelativeLayout>
+</ScrollView>

@@ -126,6 +126,43 @@ public class EstacionesRepo {
         return confirmacion;
     }
 
+    public LiveData<Boolean> editarEstacion(Estacion estacion) {
+
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(IServicioClientes.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        IServicioEstaciones service = retrofit.create(IServicioEstaciones.class);
+
+
+        JsonObject estacionUpdtJson = new JsonObject();
+        estacionUpdtJson.addProperty("id", estacion.getId());
+        estacionUpdtJson.addProperty("nombre", estacion.getNombre());
+        estacionUpdtJson.addProperty("direccion", estacion.getDireccion());
+        estacionUpdtJson.addProperty("latitud", estacion.getLatitud());
+        estacionUpdtJson.addProperty("longitud", estacion.getLongitud());
+        //Llamada HTTP
+        Call<Boolean> requestNuevaEstacion = service.editarEstacion(estacionUpdtJson);
+        requestNuevaEstacion.enqueue(new Callback<Boolean>() {
+            @Override
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
+                if (!response.isSuccessful()) {
+                    confirmacion.setValue(null);
+                } else {
+                    confirmacion.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                confirmacion.setValue(null);
+
+            }
+        });
+        return confirmacion;
+    }
+
     public MutableLiveData<Boolean> getConfirmacion() {
         return confirmacion;
     }

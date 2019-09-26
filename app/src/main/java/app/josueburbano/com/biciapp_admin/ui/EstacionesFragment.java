@@ -2,16 +2,22 @@ package app.josueburbano.com.biciapp_admin.ui;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -22,7 +28,7 @@ import app.josueburbano.com.biciapp_admin.datos.modelos.Estacion;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModel;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModelFactory;
 
-public class EstacionFragment extends Fragment {
+public class EstacionesFragment extends Fragment {
 
 
     @Nullable
@@ -33,20 +39,30 @@ public class EstacionFragment extends Fragment {
 
     List<Estacion> fetchedEstaciones;
     public EstacionViewModel viewModel;
+    public FloatingActionButton btnNuevaEstacion;
+    public ProgressBar prgBarLoading;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        viewModel= ViewModelProviders.of(getActivity(), new EstacionViewModelFactory())
+        prgBarLoading = getActivity().findViewById(R.id.progressBarEstaciones);
+        prgBarLoading.setVisibility(View.VISIBLE);
+        viewModel = ViewModelProviders.of(getActivity(), new EstacionViewModelFactory())
                 .get(EstacionViewModel.class);
         viewModel.ObtenerEstaciones();
         viewModel.ObservarEstaciones().observe(getActivity(), new Observer<List<Estacion>>() {
             @Override
             public void onChanged(@Nullable List<Estacion> estaciones) {
-                if(estaciones != null){
+                if (estaciones != null) {
+                    if(estaciones.size()==0){
+                        Toast.makeText(getContext(),
+                                "Sin estaciones", Toast.LENGTH_SHORT);
+                    }
+                    prgBarLoading.setVisibility(View.INVISIBLE);
                     fetchedEstaciones = estaciones;
 
                     //instantiate custom adapter
                     //MyCustomAdapter adapter = new MyCustomAdapter(stringsList, addInfList, idsList, getActivity(),getActivity());
-                    MyCustomAdapter adapter = new MyCustomAdapter(getActivity(),getActivity());
+                    MyCustomAdapter adapter = new MyCustomAdapter(getActivity(), getActivity());
                     adapter.setList(fetchedEstaciones);
                     adapter.setTypeKey(Estacion.class);
                     try {
@@ -62,8 +78,8 @@ public class EstacionFragment extends Fragment {
                     }
 
                     //handle listview and assign adapter
-                    if(getActivity()!=null){
-                        ListView lView = (ListView)getActivity().findViewById(R.id.lstView_estaciones);
+                    if (getActivity() != null) {
+                        ListView lView = (ListView) getActivity().findViewById(R.id.lstView_estaciones);
                         lView.setAdapter(adapter);
                     }
 
@@ -71,6 +87,16 @@ public class EstacionFragment extends Fragment {
 
             }
         });
+        btnNuevaEstacion = (FloatingActionButton) getActivity().findViewById(R.id.btn_nueva_estacion);
+        btnNuevaEstacion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CustomDialogEstacion cdd=new CustomDialogEstacion(getActivity());
+                cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                cdd.show();
+            }
+        });
+
 
     }
 }

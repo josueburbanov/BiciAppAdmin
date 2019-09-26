@@ -6,6 +6,8 @@ import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
@@ -24,6 +26,7 @@ import java.util.List;
 
 import app.josueburbano.com.biciapp_admin.R;
 import app.josueburbano.com.biciapp_admin.datos.modelos.Estacion;
+import app.josueburbano.com.biciapp_admin.ui.CustomDialogEstacion;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModel;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModelFactory;
 
@@ -62,7 +65,7 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
         }
     }
 
-    public <T> MyCustomAdapter(Context context, FragmentActivity activity) {
+    public MyCustomAdapter(Context context, FragmentActivity activity) {
         this.context = context;
         this.activity = activity;
     }
@@ -85,8 +88,6 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
     }
 
 
-    private ImageButton editBtn;
-    private ImageButton deleteBtn;
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
@@ -113,12 +114,17 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 showConfirmationBox("¿Seguro que desea eliminar el item?",context,list3.get(position), position);
-                notifyDataSetChanged();
             }
         });
         editBtn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                if (typeKey.equals(Estacion.class)){
+                    CustomDialogEstacion cdd=new CustomDialogEstacion(activity);
+                    cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    cdd.estacion = (Estacion) list.get(position);
+                    cdd.show();
+                }
                 notifyDataSetChanged();
             }
         });
@@ -174,10 +180,13 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
                     if(confirmacion){
                     Toast.makeText(context, "Estación eliminada",
                             Toast.LENGTH_SHORT).show();
-                    list.remove(position);
-                    list2.remove(position);
-                    list3.remove(position);
-                    notifyDataSetChanged();
+                    if(list.size()>position){
+                        list.remove(position);
+                        list2.remove(position);
+                        list3.remove(position);
+                        notifyDataSetChanged();
+                    }
+
 
                 }
             }

@@ -10,14 +10,14 @@
     <string name="menu_notifications">Crear Usuario</string>
     <string name="menu_estaciones">Crear Estación</string>
 
-    <string name="crear_usuario_nombre_hint">Nombre</string>
-    <string name="crear_usuario_nusuario_hint">Usuario</string>
-    <string name="crear_usuario_cedula_hint">Cédula</string>
-    <string name="crear_usuario_direccion_hint">Dirección</string>
-    <string name="crear_usuario_correo_hint">Correo</string>
-    <string name="crear_usuario_rfid_hint">RFID</string>
-    <string name="crear_usuario_telefono_hint">Telefono</string>
-    <string name="crear_usuario_button_title">Crear</string>
+    <string name="crear_usuario_nombre_hint">Belén Cuesta</string>
+    <string name="crear_usuario_nusuario_hint">Belen1994</string>
+    <string name="crear_usuario_cedula_hint">170982710</string>
+    <string name="crear_usuario_direccion_hint">Sabanilla N78-10 y Av. del Maestro</string>
+    <string name="crear_usuario_correo_hint">belen.cuesta@epn.edu.ec</string>
+    <string name="crear_usuario_rfid_hint">10029382910222</string>
+    <string name="crear_usuario_telefono_hint">09999999999</string>
+    <string name="crear_usuario_button_title">Aceptar</string>
     <string name="crear_usuario_title">Crear usuario</string>
 
     <string name="crear_estacion_nombre_hint">Seminario Mayor</string>

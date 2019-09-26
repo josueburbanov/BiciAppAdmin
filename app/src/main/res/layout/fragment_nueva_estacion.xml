@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.NuevoCliente"
+    tools:context=".ui.MainActivity"
     android:background="@drawable/curve_shap"
     >
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewTitulo"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_centerHorizontal="true"
@@ -21,11 +21,7 @@
         android:textAllCaps="false"
         android:textColor="@android:color/background_dark"
         android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/editTextNombreE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textStyle="bold"         />
 
     <TextView
         android:id="@+id/textView6"
@@ -36,7 +32,7 @@
         android:paddingLeft="32dp"
         android:paddingTop="64dp"
         android:textStyle="bold"
-        android:layout_below="@id/textView3"/>
+        android:layout_below="@id/textViewTitulo"/>
 
     <EditText
         android:id="@+id/editTextNombreE"
@@ -45,11 +41,6 @@
         android:hint="@string/crear_estacion_nombre_hint"
         android:inputType="textPersonName"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/editTextDireccionE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3"
         android:layout_below="@+id/textView6"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"/>
@@ -127,34 +118,25 @@
         android:hint="@string/crear_estacion_longitud_hint"
         android:inputType="numberSigned|number|numberDecimal"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/btnCrearE"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView9"
         android:layout_below="@+id/textView9"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"/>
 
 
-    <Button
-        android:id="@+id/btnCrearE"
-        android:layout_width="wrap_content"
+    <com.kusu.library.LoadingButton
+        android:id="@+id/btnCrearEstacion"
+        android:layout_width="146dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/editTextLongitud"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
         android:layout_marginRight="8dp"
-        android:background="@drawable/curve_shap"
+        android:layout_marginBottom="32dp"
         android:text="@string/crear_usuario_button_title"
-        android:textColor="@color/cardview_light_background"
-        android:textStyle="bold"
-        />
-
-
-
-
+        android:textColor="@color/cardview_dark_background"
+        app:lb_buttonColor="#E0F2F1"
+        app:lb_isCircular="false"
+        app:lb_isShadowEnable="false" />
 </RelativeLayout>

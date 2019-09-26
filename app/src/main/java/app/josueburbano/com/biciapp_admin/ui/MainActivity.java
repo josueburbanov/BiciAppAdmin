@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     case R.id.navigation_estaciones:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new EstacionFragment()).commit();
+                            new EstacionesFragment()).commit();
                     setHintSearchView("Estaciones");
                     return true;
             }
@@ -184,19 +184,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.navigation_reservas: {
                 setHintSearchView("Reservas");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new NuevaReserva()).commit();
+                        new CustomDialogReserva()).commit();
                 break;
             }
             case R.id.navigation_bicicletas: {
                 setHintSearchView("Bicicletas");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new NuevaBicicleta()).commit();
+                        new CustomDialogBicicleta()).commit();
                 break;
             }
             case R.id.navigation_clientes: {
                 setHintSearchView("Clientes");
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new NuevoCliente()).commit();
+                CustomDialogCliente cdd=new CustomDialogCliente(this);
+                cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                cdd.show();
                 break;
             }
             case R.id.navigation_estaciones:{
