@@ -16,11 +16,8 @@ import com.kusu.library.LoadingButton;
 
 import app.josueburbano.com.biciapp_admin.R;
 import app.josueburbano.com.biciapp_admin.datos.modelos.Cliente;
-import app.josueburbano.com.biciapp_admin.datos.modelos.Estacion;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.ClienteViewModel;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.ClienteViewModelFactory;
-import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModel;
-import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModelFactory;
 
 public class CustomDialogCliente extends Dialog implements
         android.view.View.OnClickListener {
@@ -43,13 +40,13 @@ public class CustomDialogCliente extends Dialog implements
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.fragment_nuevo_cliente);
-        yes = (LoadingButton) findViewById(R.id.btnCrearCliente);
+        yes = (LoadingButton) findViewById(R.id.btnAceptar);
         yes.setOnClickListener(this);
         editTextNombre = findViewById(R.id.editTextNombreCliente);
         editTextUsuario = findViewById(R.id.editTextNombreUsuario);
         editTextCedula = findViewById(R.id.editTextCedula);
         editTextCorreo = findViewById(R.id.editTextCorreo);
-        editTextTelefono = findViewById(R.id.editTextTelefono);
+        editTextTelefono = findViewById(R.id.editTextHoraFin);
         editTextRfid = findViewById(R.id.editTextRfid);
         editTextDireccion = findViewById(R.id.editTextDireccionCliente);
 
@@ -73,7 +70,7 @@ public class CustomDialogCliente extends Dialog implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnCrearEstacion:
+                case R.id.btnAceptar:
                 yes.showLoading();
                 v.setEnabled(false);
                 if (cliente != null) {
@@ -120,12 +117,12 @@ public class CustomDialogCliente extends Dialog implements
                 .get(ClienteViewModel.class);
         Cliente clienteEditar = new Cliente();
         clienteEditar.setId(cliente.getId());
-        clienteEditar.setNombre(String.valueOf(editTextNombre.getText().toString()));
-        clienteEditar.setUsuario(String.valueOf(editTextUsuario.getText().toString()));
-        clienteEditar.setCedula(String.valueOf(editTextCedula.getText().toString()));
-        clienteEditar.setCorreoElectronico(String.valueOf(editTextCorreo.getText().toString()));
-        clienteEditar.setTelefono(String.valueOf(editTextTelefono.getText().toString()));
-        clienteEditar.setRfid(String.valueOf(editTextRfid.getText().toString()));
+        clienteEditar.setNombre(String.valueOf(editTextNombre.getText()));
+        clienteEditar.setUsuario(String.valueOf(editTextUsuario.getText()));
+        clienteEditar.setCedula(String.valueOf(editTextCedula.getText()));
+        clienteEditar.setCorreoElectronico(String.valueOf(editTextCorreo.getText()));
+        clienteEditar.setTelefono(String.valueOf(editTextTelefono.getText()));
+        clienteEditar.setRfid(String.valueOf(editTextRfid.getText()));
         clienteEditar.setDireccion(String.valueOf(editTextDireccion.getText()));
 
         viewModel.EditarCliente(clienteEditar);
@@ -136,7 +133,7 @@ public class CustomDialogCliente extends Dialog implements
                     Toast.makeText(c.getApplicationContext(), "Cliente actualizado " + cliente.getCedula(), Toast.LENGTH_LONG).show();
                     dismiss();
                     c.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                            new EstacionesFragment()).commit();
+                            new ClientesFragment()).commit();
                 }
             }
         });

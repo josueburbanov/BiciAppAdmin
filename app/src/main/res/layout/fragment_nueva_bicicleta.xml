@@ -1,14 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CustomDialogCliente">
+    android:orientation="vertical"
+    tools:context=".ui.MainActivity"
+    android:background="@drawable/curve_shap">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="xd" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/textViewTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/cardview_light_background"
+            android:gravity="center"
+            android:text="Agregar Bicicleta"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/textViewTituloModelo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modelo:"
+            android:textColor="@android:color/background_light"
+            android:paddingLeft="32dp"
+            android:paddingTop="64dp"
+            android:textStyle="bold"
+            android:layout_below="@id/textViewTitulo"/>
+
+        <Spinner
+            android:id="@+id/spinnerModelo"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTituloModelo"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:ems="10"
+            android:hint="Specialized"
+            android:spinnerMode="dialog"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewTituloCodigo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Codigo:"
+            android:textColor="@android:color/background_light"
+            android:paddingLeft="32dp"
+            android:paddingTop="32dp"
+            android:textStyle="bold"
+            android:layout_below="@id/spinnerModelo"/>
+
+        <EditText
+            android:id="@+id/editTextCodigo"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="941823381572377"
+            android:inputType="textPersonName"
+            android:textSize="14sp"
+            android:layout_below="@id/textViewTituloCodigo"/>
+
+        <com.kusu.library.LoadingButton
+            android:id="@+id/btnAceptar"
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/crear_usuario_button_title"
+            android:textColor="@color/cardview_dark_background"
+            app:lb_buttonColor="#E0F2F1"
+            app:lb_isCircular="false"
+            app:lb_isShadowEnable="false"
+            android:layout_below="@id/editTextCodigo"/>
+
+    </RelativeLayout>
+</ScrollView>

@@ -26,4 +26,6 @@ public interface IServicioEstaciones {
     @PUT("/EstacionesServicio.svc/estaciones")
     public Call<Boolean> editarEstacion(@Body JsonObject body);
 
+    @GET("/EstacionesServicio.svc/estaciones/bici/{idBici}")
+    Call<Estacion> obtenerEstacionByBici(@Path("idBici")String idBici);
 }

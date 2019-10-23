@@ -1,14 +1,190 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CustomDialogCliente">
+    android:orientation="vertical"
+    tools:context=".ui.MainActivity"
+    android:background="@drawable/curve_shap">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="xd" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/textViewTitulo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/cardview_light_background"
+            android:gravity="center"
+            android:text="Agregar Reserva"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@android:color/background_dark"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:id="@+id/textViewTituloCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cliente:"
+            android:textColor="@android:color/background_light"
+            android:paddingLeft="32dp"
+            android:paddingTop="32dp"
+            android:textStyle="bold"
+            android:layout_below="@id/textViewTitulo"/>
+
+        <Spinner
+            android:id="@+id/spinnerClientes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTituloCliente"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:hint="Clientes..."
+            android:background="@android:drawable/btn_dropdown"
+            android:ems="10"
+            android:spinnerMode="dialog"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewTituloEstacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estación:"
+            android:textColor="@android:color/background_light"
+            android:paddingLeft="32dp"
+            android:paddingTop="32dp"
+            android:textStyle="bold"
+            android:layout_below="@id/spinnerClientes"/>
+
+        <Spinner
+            android:id="@+id/spinnerEstaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTituloEstacion"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:hint="Estaciones..."
+            android:background="@android:drawable/btn_dropdown"
+            android:ems="10"
+            android:spinnerMode="dialog"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewTituloBicicleta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bicicleta:"
+            android:textColor="@android:color/background_light"
+            android:paddingLeft="32dp"
+            android:paddingTop="32dp"
+            android:textStyle="bold"
+            android:layout_below="@id/spinnerEstaciones"/>
+
+        <Spinner
+            android:id="@+id/spinnerBicicletas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTituloBicicleta"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:hint="Bicicletas..."
+            android:background="@android:drawable/btn_dropdown"
+            android:ems="10"
+            android:spinnerMode="dialog"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewTituloFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fecha Reserva:"
+            android:textColor="@android:color/background_light"
+            android:paddingLeft="32dp"
+            android:paddingTop="32dp"
+            android:textStyle="bold"
+            android:layout_below="@id/spinnerBicicletas"/>
+
+
+        <EditText
+            android:id="@+id/editTextFecha"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_below="@id/textViewTituloFecha"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="dd/mm/yyyy"
+            android:inputType="date"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewTituloHoraInicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora inicio:"
+            android:textColor="@android:color/background_light"
+            android:paddingLeft="32dp"
+            android:paddingTop="32dp"
+            android:textStyle="bold"
+            android:layout_below="@id/editTextFecha"/>
+
+        <EditText
+            android:id="@+id/editTextHoraInicio"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_below="@id/textViewTituloHoraInicio"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="hh:mm"
+            android:inputType="time"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/textViewTituloHoraFin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora Fin:"
+            android:textColor="@android:color/background_light"
+            android:paddingLeft="32dp"
+            android:paddingTop="32dp"
+            android:textStyle="bold"
+            android:layout_below="@id/editTextHoraInicio"/>
+
+        <EditText
+            android:id="@+id/editTextHoraFin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTituloHoraFin"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:ems="10"
+            android:hint="hh:mm"
+            android:inputType="textPersonName"
+            android:textSize="14sp" />
+
+        <com.kusu.library.LoadingButton
+            android:id="@+id/btnAceptar"
+            android:layout_width="146dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="32dp"
+            android:text="@string/crear_usuario_button_title"
+            android:textColor="@color/cardview_dark_background"
+            app:lb_buttonColor="#E0F2F1"
+            app:lb_isCircular="false"
+            app:lb_isShadowEnable="false"
+            android:layout_below="@id/editTextHoraFin"/>
+
+    </RelativeLayout>
+</ScrollView>

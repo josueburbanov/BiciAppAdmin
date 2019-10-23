@@ -25,8 +25,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import app.josueburbano.com.biciapp_admin.R;
+import app.josueburbano.com.biciapp_admin.datos.modelos.Bicicleta;
+import app.josueburbano.com.biciapp_admin.datos.modelos.Cliente;
 import app.josueburbano.com.biciapp_admin.datos.modelos.Estacion;
+import app.josueburbano.com.biciapp_admin.datos.modelos.Reserva;
+import app.josueburbano.com.biciapp_admin.ui.CustomDialogBicicleta;
+import app.josueburbano.com.biciapp_admin.ui.CustomDialogCliente;
 import app.josueburbano.com.biciapp_admin.ui.CustomDialogEstacion;
+import app.josueburbano.com.biciapp_admin.ui.ViewModels.BicicletaViewModel;
+import app.josueburbano.com.biciapp_admin.ui.ViewModels.BicicletaViewModelFactory;
+import app.josueburbano.com.biciapp_admin.ui.ViewModels.ClienteViewModel;
+import app.josueburbano.com.biciapp_admin.ui.ViewModels.ClienteViewModelFactory;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModel;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModelFactory;
 
@@ -58,6 +67,42 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
                 Method addInfo1 = Estacion.class.getMethod("addInfo1");
                 Method addInfo2 = Estacion.class.getMethod("addInfo2");
                 Method getId = Estacion.class.getMethod("getId");
+                list2.add((String) addInfo1.invoke(item));
+                list3.add((String) getId.invoke(item));
+                list4.add((String) addInfo2.invoke(item));
+            }
+        }
+
+        else if(typeKey == Cliente.class){
+            for (T item : list) {
+                list1.add(item.toString());
+                Method addInfo1 = Cliente.class.getMethod("addInfo1");
+                Method addInfo2 = Cliente.class.getMethod("addInfo2");
+                Method getId = Cliente.class.getMethod("getId");
+                list2.add((String) addInfo1.invoke(item));
+                list3.add((String) getId.invoke(item));
+                list4.add((String) addInfo2.invoke(item));
+            }
+        }
+
+        else if(typeKey == Bicicleta.class){
+            for (T item : list) {
+                list1.add(item.toString());
+                Method addInfo1 = Bicicleta.class.getMethod("addInfo1");
+                Method addInfo2 = Bicicleta.class.getMethod("addInfo2");
+                Method getId = Bicicleta.class.getMethod("getId");
+                list2.add((String) addInfo1.invoke(item));
+                list3.add((String) getId.invoke(item));
+                list4.add((String) addInfo2.invoke(item));
+            }
+        }
+
+        else if(typeKey == Reserva.class){
+            for (T item : list) {
+                list1.add(item.toString());
+                Method addInfo1 = Reserva.class.getMethod("addInfo1");
+                Method addInfo2 = Reserva.class.getMethod("addInfo2");
+                Method getId = Reserva.class.getMethod("getId");
                 list2.add((String) addInfo1.invoke(item));
                 list3.add((String) getId.invoke(item));
                 list4.add((String) addInfo2.invoke(item));
@@ -124,7 +169,18 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
                     cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     cdd.estacion = (Estacion) list.get(position);
                     cdd.show();
+                }else if(typeKey.equals(Cliente.class)){
+                    CustomDialogCliente cdd=new CustomDialogCliente(activity);
+                    cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    cdd.cliente = (Cliente) list.get(position);
+                    cdd.show();
+                }else if(typeKey.equals(Bicicleta.class)){
+                    CustomDialogBicicleta cdd=new CustomDialogBicicleta(activity);
+                    cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    cdd.bicicleta = (Bicicleta) list.get(position);
+                    cdd.show();
                 }
+
                 notifyDataSetChanged();
             }
         });
@@ -151,6 +207,10 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
                                 .show();
                         if (typeKey.equals(Estacion.class)){
                             RemoveEstacion(item, position);
+                        }else if(typeKey.equals(Cliente.class)){
+                            RemoveCliente(item, position);
+                        }else if(typeKey.equals(Bicicleta.class)){
+                            RemoveBicicleta(item, position);
                         }
                     }
                 });
@@ -192,7 +252,53 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
             }
             }
         });
-
-
     }
-}
+
+    private void RemoveCliente(String idItem, final int position) {
+        ClienteViewModel viewModel= ViewModelProviders.of(activity, new ClienteViewModelFactory())
+                .get(ClienteViewModel.class);
+        viewModel.EliminarCliente(idItem);
+        viewModel.ObservarConfirmacion().observe(activity, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean confirmacion) {
+                if (confirmacion != null) {
+                    if (confirmacion) {
+                        Toast.makeText(context, "Cliente eliminado",
+                                Toast.LENGTH_SHORT).show();
+                        if (list.size() > position) {
+                            list.remove(position);
+                            list2.remove(position);
+                            list3.remove(position);
+                            notifyDataSetChanged();
+                        }
+
+
+                    }
+                }
+            }});
+        }
+
+    private void RemoveBicicleta(String idItem, final int position) {
+        BicicletaViewModel viewModel= ViewModelProviders.of(activity, new BicicletaViewModelFactory())
+                .get(BicicletaViewModel.class);
+        viewModel.EliminarBicicleta(idItem);
+        viewModel.ObservarConfirmacion().observe(activity, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean confirmacion) {
+                if (confirmacion != null) {
+                    if (confirmacion) {
+                        Toast.makeText(context, "Bicicleta eliminada",
+                                Toast.LENGTH_SHORT).show();
+                        if (list.size() > position) {
+                            list.remove(position);
+                            list2.remove(position);
+                            list3.remove(position);
+                            notifyDataSetChanged();
+                        }
+
+
+                    }
+                }
+            }});
+    }
+    }

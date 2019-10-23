@@ -1,5 +1,7 @@
 package app.josueburbano.com.biciapp_admin.datos.modelos;
 
+import android.support.annotation.NonNull;
+
 import java.io.Serializable;
 
 public class Cliente implements Serializable {
@@ -94,4 +96,23 @@ public class Cliente implements Serializable {
     public void setRol(String rol) {
         this.rol = rol;
     }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getNombre();
+    }
+
+    public String addInfo1(){
+        return getCedula();
+    }
+
+    public String addInfo2(){
+        if(getRol()==null){
+            return "Cliente";
+        }
+        return getRol();
+    }
+
+
 }

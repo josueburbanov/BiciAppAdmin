@@ -132,7 +132,7 @@
         android:layout_below="@id/editTextCorreo"/>
 
         <EditText
-            android:id="@+id/editTextTelefono"
+            android:id="@+id/editTextHoraFin"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewTituloTelefonoCliente"
@@ -152,7 +152,7 @@
         android:paddingLeft="32dp"
         android:paddingTop="32dp"
         android:textStyle="bold"
-        android:layout_below="@id/editTextTelefono"/>
+        android:layout_below="@id/editTextHoraFin"/>
 
         <EditText
             android:id="@+id/editTextRfid"
@@ -193,7 +193,7 @@
 
 
     <com.kusu.library.LoadingButton
-        android:id="@+id/btnCrearCliente"
+        android:id="@+id/btnAceptar"
         android:layout_width="146dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

@@ -22,6 +22,7 @@ public class EstacionesRepo {
     private MutableLiveData<Estacion> data = new MutableLiveData<>();
     private MutableLiveData<Boolean> confirmacion = new MutableLiveData<>();
     private MutableLiveData<List<Estacion>> estaciones = new MutableLiveData<>();
+    private MutableLiveData<Estacion> estacionByBici = new MutableLiveData<>();
 
     public LiveData<List<Estacion>> obtenerEstaciones(){
         Retrofit retrofit = new Retrofit.Builder()
@@ -46,7 +47,6 @@ public class EstacionesRepo {
             @Override
             public void onFailure(Call<List<Estacion>> call, Throwable t) {
                 estaciones.setValue(null);
-
             }
         });
         return estaciones;
@@ -165,6 +165,38 @@ public class EstacionesRepo {
 
     public MutableLiveData<Boolean> getConfirmacion() {
         return confirmacion;
+    }
+
+    public LiveData<Estacion> obtenerEstacionByBici(String idBici){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(IServicioClientes.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        IServicioEstaciones service = retrofit.create(IServicioEstaciones.class);
+
+        //Llamada HTTP
+        Call<Estacion> requestEstacionByBici = service.obtenerEstacionByBici(idBici);
+        requestEstacionByBici.enqueue(new Callback<Estacion>() {
+            @Override
+            public void onResponse(Call<Estacion> call, Response<Estacion> response) {
+                if (!response.isSuccessful()) {
+                    estacionByBici.setValue(null);
+                } else {
+                    estacionByBici.setValue(response.body());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Estacion> call, Throwable t) {
+                estacionByBici.setValue(null);
+            }
+        });
+        return estacionByBici;
+    }
+
+    public MutableLiveData<Estacion> getEstacionByBici() {
+        return estacionByBici;
     }
 
 

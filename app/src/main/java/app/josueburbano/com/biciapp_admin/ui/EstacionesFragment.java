@@ -9,12 +9,9 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -79,7 +76,7 @@ public class EstacionesFragment extends Fragment {
 
                     //handle listview and assign adapter
                     if (getActivity() != null) {
-                        ListView lView = (ListView) getActivity().findViewById(R.id.lstView_estaciones);
+                        ListView lView = (ListView) getActivity().findViewById(R.id.lstView_reservas);
                         lView.setAdapter(adapter);
                     }
 

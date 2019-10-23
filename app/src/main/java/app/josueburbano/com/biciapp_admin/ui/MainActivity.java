@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private DrawerLayout drawer;
-    private Cliente clienteView;
+    public Cliente clienteView;
     private MenuItem mSearchItem;
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
@@ -183,14 +183,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (item.getItemId()) {
             case R.id.navigation_reservas: {
                 setHintSearchView("Reservas");
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CustomDialogReserva()).commit();
+                CustomDialogReserva cdd=new CustomDialogReserva(this);
+                cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                cdd.show();
                 break;
             }
             case R.id.navigation_bicicletas: {
                 setHintSearchView("Bicicletas");
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CustomDialogBicicleta()).commit();
+                CustomDialogBicicleta cdd=new CustomDialogBicicleta(this);
+                cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                cdd.show();
                 break;
             }
             case R.id.navigation_clientes: {
