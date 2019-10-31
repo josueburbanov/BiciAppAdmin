@@ -32,12 +32,15 @@ import app.josueburbano.com.biciapp_admin.datos.modelos.Reserva;
 import app.josueburbano.com.biciapp_admin.ui.CustomDialogBicicleta;
 import app.josueburbano.com.biciapp_admin.ui.CustomDialogCliente;
 import app.josueburbano.com.biciapp_admin.ui.CustomDialogEstacion;
+import app.josueburbano.com.biciapp_admin.ui.CustomDialogReserva;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.BicicletaViewModel;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.BicicletaViewModelFactory;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.ClienteViewModel;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.ClienteViewModelFactory;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModel;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModelFactory;
+import app.josueburbano.com.biciapp_admin.ui.ViewModels.ReservaViewModel;
+import app.josueburbano.com.biciapp_admin.ui.ViewModels.ReservaViewModelFactory;
 
 public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
     private List<T> list;
@@ -179,6 +182,18 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
                     cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     cdd.bicicleta = (Bicicleta) list.get(position);
                     cdd.show();
+                }else if(typeKey.equals(Reserva.class)){
+                    Reserva reserva = (Reserva) list.get(position);
+                    if(reserva.isActiva()){
+                        CustomDialogReserva cdd=new CustomDialogReserva(activity);
+                        cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                        cdd.reserva = (Reserva) list.get(position);
+                        cdd.show();
+                    }else{
+                        Toast.makeText(context, "Reserva inactiva no se puede eliminar",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
                 notifyDataSetChanged();
@@ -196,21 +211,20 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
         // set the message to display
         alertbox.setMessage(messageToShow);
 
-        // set a positive/yes button and create a listener
+        // set a positive/submit button and create a listener
         alertbox.setPositiveButton("Yes",
                 new DialogInterface.OnClickListener() {
 
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
-                        Toast.makeText(context,
-                                "'Yes' button clicked", Toast.LENGTH_SHORT)
-                                .show();
                         if (typeKey.equals(Estacion.class)){
                             RemoveEstacion(item, position);
                         }else if(typeKey.equals(Cliente.class)){
                             RemoveCliente(item, position);
                         }else if(typeKey.equals(Bicicleta.class)){
                             RemoveBicicleta(item, position);
+                        }else if(typeKey.equals(Reserva.class)) {
+                            RemoveReserva(item, position);
                         }
                     }
                 });
@@ -220,13 +234,35 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
 
             // do something when the button is clicked
             public void onClick(DialogInterface arg0, int arg1) {
-                Toast.makeText(context, "'No' button clicked",
-                        Toast.LENGTH_SHORT).show();
             }
         });
 
         // display box
         alertbox.show();
+    }
+
+    private void RemoveReserva(String idItem, int position) {
+        ReservaViewModel viewModel= ViewModelProviders.of(activity, new ReservaViewModelFactory())
+                .get(ReservaViewModel.class);
+        viewModel.EliminarReserva(idItem);
+        viewModel.ObservarConfirmacionEliminacion().observe(activity, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean confirmacion) {
+                if (confirmacion != null) {
+                    if (confirmacion) {
+                        Toast.makeText(context, "Reserva eliminada",
+                                Toast.LENGTH_SHORT).show();
+                        if (list.size() > position) {
+                            list.remove(position);
+                            list2.remove(position);
+                            list3.remove(position);
+                            notifyDataSetChanged();
+                        }
+
+
+                    }
+                }
+            }});
     }
 
     private void RemoveEstacion(String idItem, final int position) {

@@ -89,7 +89,7 @@ public class Reserva implements Serializable {
 
     }
     public String addInfo1(){
-        return "Fecha: "+getFecha()+" | Inicia: "+getHoraInicio()+" | Fin: "+getHoraFin();
+        return getFecha()+" | Inicia: "+getHoraInicio()+" | Fin: "+getHoraFin();
     }
 
     public boolean isActiva() {

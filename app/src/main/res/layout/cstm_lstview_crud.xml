@@ -29,8 +29,8 @@
 
     <TextView
         android:id="@+id/list_item_string"
-        android:layout_width="230dp"
-        android:layout_height="72dp"
+        android:layout_width="264dp"
+        android:layout_height="70dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
@@ -39,7 +39,7 @@
         android:paddingLeft="8dp"
         android:text="default"
         android:textColor="@color/colorPrimaryDark"
-        android:textSize="16sp"
+        android:textSize="14sp"
         android:textStyle="bold" />
 
     <TextView

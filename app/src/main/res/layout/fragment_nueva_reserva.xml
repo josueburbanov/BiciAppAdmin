@@ -45,11 +45,11 @@
             android:layout_below="@id/textViewTituloCliente"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:hint="Clientes..."
             android:background="@android:drawable/btn_dropdown"
             android:ems="10"
+            android:hint="Clientes..."
             android:spinnerMode="dialog"
-            android:textSize="14sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textViewTituloEstacion"
@@ -69,11 +69,11 @@
             android:layout_below="@id/textViewTituloEstacion"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:hint="Estaciones..."
             android:background="@android:drawable/btn_dropdown"
             android:ems="10"
+            android:hint="Estaciones..."
             android:spinnerMode="dialog"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/textViewTituloBicicleta"
@@ -93,11 +93,11 @@
             android:layout_below="@id/textViewTituloBicicleta"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="32dp"
-            android:hint="Bicicletas..."
             android:background="@android:drawable/btn_dropdown"
             android:ems="10"
+            android:hint="Bicicletas..."
             android:spinnerMode="dialog"
-            android:textSize="14sp" />
+            android:textSize="10sp" />
 
         <TextView
             android:id="@+id/textViewTituloFecha"

@@ -21,44 +21,46 @@ import java.util.List;
 
 import app.josueburbano.com.biciapp_admin.R;
 import app.josueburbano.com.biciapp_admin.datos.MyCustomAdapter;
+import app.josueburbano.com.biciapp_admin.datos.modelos.Candado;
 import app.josueburbano.com.biciapp_admin.datos.modelos.Reserva;
+import app.josueburbano.com.biciapp_admin.ui.ViewModels.CandadoViewModel;
+import app.josueburbano.com.biciapp_admin.ui.ViewModels.CandadoViewModelFactory;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.ReservaViewModel;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.ReservaViewModelFactory;
 
-public class ReservasFragment extends Fragment {
+public class CandadosFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_reservas, container, false);
+        return inflater.inflate(R.layout.fragment_candados, container, false);
     }
-    List<Reserva> fetchedReservas;
-    public ReservaViewModel viewModel;
-    public FloatingActionButton btnNuevaReserva;
+    List<Candado> fetchedCandados;
+    public CandadoViewModel viewModel;
+    public FloatingActionButton btnNuevo;
     public ProgressBar prgBarLoading;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        prgBarLoading = getActivity().findViewById(R.id.progressBarReservas);
+        prgBarLoading = getActivity().findViewById(R.id.progressBar);
         prgBarLoading.setVisibility(View.VISIBLE);
-        viewModel = ViewModelProviders.of(getActivity(), new ReservaViewModelFactory())
-                .get(ReservaViewModel.class);
-        viewModel.ObtenerReservas();
-        viewModel.ObservarReservas().observe(getActivity(), new Observer<List<Reserva>>() {
+        viewModel = ViewModelProviders.of(getActivity(), new CandadoViewModelFactory())
+                .get(CandadoViewModel.class);
+        viewModel.ObtenerCandados();
+        viewModel.ObservarCandados().observe(getActivity(), new Observer<List<Candado>>() {
             @Override
-            public void onChanged(@Nullable List<Reserva> reservas) {
-                if (reservas != null) {
-                    if(reservas.size()==0){
+            public void onChanged(@Nullable List<Candado> candados) {
+                if (candados != null) {
+                    if(candados.size()==0){
                         Toast.makeText(getActivity().getApplication(),
-                                "Sin Reservas", Toast.LENGTH_SHORT);
+                                "Sin candados", Toast.LENGTH_SHORT);
                     }
                     prgBarLoading.setVisibility(View.INVISIBLE);
-                    fetchedReservas = reservas;
+                    fetchedCandados = candados;
 
                     //instantiate custom adapter
-                    //MyCustomAdapter adapter = new MyCustomAdapter(stringsList, addInfList, idsList, getActivity(),getActivity());
                     MyCustomAdapter adapter = new MyCustomAdapter(getActivity(), getActivity());
-                    adapter.setList(fetchedReservas);
-                    adapter.setTypeKey(Reserva.class);
+                    adapter.setList(fetchedCandados);
+                    adapter.setTypeKey(Candado.class);
                     try {
                         adapter.prepareLists();
                     } catch (NoSuchMethodException e) {
@@ -81,11 +83,11 @@ public class ReservasFragment extends Fragment {
 
             }
         });
-        btnNuevaReserva = (FloatingActionButton) getActivity().findViewById(R.id.btn_nueva_reserva);
-        btnNuevaReserva.setOnClickListener(new View.OnClickListener() {
+        btnNuevo = (FloatingActionButton) getActivity().findViewById(R.id.btn_nuevo);
+        btnNuevo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CustomDialogReserva cdd=new CustomDialogReserva(getActivity());
+                CustomDialogCandado cdd=new CustomDialogCandado(getActivity());
                 cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                 cdd.show();
             }

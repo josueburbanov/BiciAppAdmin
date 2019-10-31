@@ -41,7 +41,7 @@ public class EstacionesFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        prgBarLoading = getActivity().findViewById(R.id.progressBarEstaciones);
+        prgBarLoading = getActivity().findViewById(R.id.progressBar);
         prgBarLoading.setVisibility(View.VISIBLE);
         viewModel = ViewModelProviders.of(getActivity(), new EstacionViewModelFactory())
                 .get(EstacionViewModel.class);
@@ -76,7 +76,7 @@ public class EstacionesFragment extends Fragment {
 
                     //handle listview and assign adapter
                     if (getActivity() != null) {
-                        ListView lView = (ListView) getActivity().findViewById(R.id.lstView_reservas);
+                        ListView lView = (ListView) getActivity().findViewById(R.id.lstView);
                         lView.setAdapter(adapter);
                     }
 
@@ -84,7 +84,7 @@ public class EstacionesFragment extends Fragment {
 
             }
         });
-        btnNuevaEstacion = (FloatingActionButton) getActivity().findViewById(R.id.btn_nueva_estacion);
+        btnNuevaEstacion = (FloatingActionButton) getActivity().findViewById(R.id.btn_nuevo);
         btnNuevaEstacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

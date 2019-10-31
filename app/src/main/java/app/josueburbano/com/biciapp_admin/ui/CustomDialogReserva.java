@@ -8,6 +8,7 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
@@ -29,6 +30,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import app.josueburbano.com.biciapp_admin.R;
 import app.josueburbano.com.biciapp_admin.datos.modelos.Bicicleta;
@@ -70,6 +72,10 @@ public class CustomDialogReserva extends Dialog implements
     int horaFin = calendar.get(Calendar.HOUR_OF_DAY) + 1;
     int minutoFin = calendar.get(Calendar.MINUTE) + 2;
 
+    List<Cliente> clientesSpinner;
+    List<Estacion> estacionesSpinner;
+    List<Bicicleta> bicicletasSpinner;
+
     public CustomDialogReserva(FragmentActivity a) {
         super(a);
         // TODO Auto-generated constructor stub
@@ -80,8 +86,8 @@ public class CustomDialogReserva extends Dialog implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.fragment_nuevo_cliente);
-        aceptar = (LoadingButton) findViewById(R.id.btnCrearEstacion);
+        setContentView(R.layout.fragment_nueva_reserva);
+        aceptar = findViewById(R.id.btnAceptar);
         aceptar.setOnClickListener(this);
         spinnerCliente= findViewById(R.id.spinnerClientes);
         spinnerEstacion= findViewById(R.id.spinnerEstaciones);
@@ -92,18 +98,26 @@ public class CustomDialogReserva extends Dialog implements
 
         TextView textViewTitulo = findViewById(R.id.textViewTitulo);
 
+
+
+        CargarSpinners();
         if (reserva != null) {
-            textViewTitulo.setText("Editando (" + reserva.getFecha() +" - "+ reserva.getHoraInicio()+ ")");
+            textViewTitulo.setText("Editando (" + reserva.getFecha() + " - " + reserva.getHoraInicio() + ")");
             ClienteViewModel viewModel = ViewModelProviders.of(c, new ClienteViewModelFactory())
                     .get(ClienteViewModel.class);
             viewModel.ObtenerCliente(reserva.getIdCliente());
             viewModel.ObservarClienteById().observe(c, new Observer<Cliente>() {
                 @Override
                 public void onChanged(@Nullable Cliente cliente) {
-                    if (cliente != null){
-                        String[] itemsClientes = {cliente.toString()};
-                        ArrayAdapter<String> adapterClientes = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_dropdown_item, itemsClientes);
-                        spinnerCliente.setAdapter(adapterClientes);
+                    if (cliente != null) {
+                        int indiceSeleccionado = -1;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            indiceSeleccionado = IntStream.range(0, clientesSpinner.size())
+                                    .filter(i -> cliente.getId() == clientesSpinner.get(i).getId())
+                                    .findFirst() // first occurence
+                                    .orElse(-1); // No element found
+                        }
+                        spinnerEstacion.setSelection(indiceSeleccionado,true);
                     }
                 }
             });
@@ -113,16 +127,27 @@ public class CustomDialogReserva extends Dialog implements
             viewModelE.ObservarEstacionByBici().observe(c, new Observer<Estacion>() {
                 @Override
                 public void onChanged(@Nullable Estacion estacion) {
-                    if(estacion != null){
-                        String[] itemsEstaciones = {estacion.getNombre()};
-                        ArrayAdapter<String> adapterEstaciones = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_dropdown_item, itemsEstaciones);
-                        spinnerEstacion.setAdapter(adapterEstaciones);
+                    if (estacion != null) {
+                        int indiceSeleccionado = -1;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                            indiceSeleccionado = IntStream.range(0, estacionesSpinner.size())
+                                    .filter(i -> estacion.getId() == estacionesSpinner.get(i).getId())
+                                    .findFirst() // first occurence
+                                    .orElse(-1); // No element found
+                        }
+                        spinnerEstacion.setSelection(indiceSeleccionado,true);
                     }
                 }
             });
-            String[] itemsBicicletas = {reserva.getIdBici()};
-            ArrayAdapter<String> adapterBicicletas = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_dropdown_item, itemsBicicletas);
-            spinnerBicicleta.setAdapter(adapterBicicletas);
+            int indiceSeleccionado = -1;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                indiceSeleccionado = IntStream.range(0, estacionesSpinner.size())
+                        .filter(i -> reserva.getIdBici() == bicicletasSpinner.get(i).getId())
+                        .findFirst() // first occurence
+                        .orElse(-1); // No element found
+            }
+            spinnerEstacion.setSelection(indiceSeleccionado,true);
+
             editTextFecha.setText(reserva.getFecha());
             editTextHoraInicio.setText(reserva.getHoraInicio());
             editTextHoraFin.setText(reserva.getHoraFin());
@@ -305,54 +330,12 @@ public class CustomDialogReserva extends Dialog implements
     }
 
     private void CrearReserva() {
-        EstacionViewModel viewModelE = ViewModelProviders.of(c, new EstacionViewModelFactory())
-                .get(EstacionViewModel.class);
-        viewModelE.ObtenerEstaciones();
-        viewModelE.ObservarEstaciones().observe(c, new Observer<List<Estacion>>() {
-            @Override
-            public void onChanged(@Nullable List<Estacion> estaciones) {
-                String[] itemsEstaciones = estaciones.toArray(new String[estaciones.size()]);
-                ArrayAdapter<String> adapterEstaciones = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_dropdown_item, itemsEstaciones);
-                spinnerEstacion.setAdapter(adapterEstaciones);
-            }
-        });
-        spinnerEstacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                BicicletaViewModel viewModelR = ViewModelProviders.of(c, new BicicletaViewModelFactory())
-                        .get(BicicletaViewModel.class);
-                Estacion estacion = (Estacion)spinnerEstacion.getSelectedItem();
-                viewModelR.ObtenerBicisByEstacion(estacion.getId());
-                viewModelR.ObservarBicicletasByEstacion().observe(c, new Observer<List<Bicicleta>>() {
-                    @Override
-                    public void onChanged(@Nullable List<Bicicleta> bicicletas) {
-                        String[] itemsBicicletas = bicicletas.toArray(new String[bicicletas.size()]);
-                        ArrayAdapter<String> adapterBicicletas = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_dropdown_item, itemsBicicletas);
-                        spinnerEstacion.setAdapter(adapterBicicletas);
-                    }
-                });
-            }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        ClienteViewModel viewModelC = ViewModelProviders.of(c, new ClienteViewModelFactory())
-                .get(ClienteViewModel.class);
-        viewModelC.ObtenerClientes();
-        viewModelC.ObservarClientes().observe(c, new Observer<List<Cliente>>() {
-            @Override
-            public void onChanged(@Nullable List<Cliente> clientes) {
-                String[] itemsClientes = clientes.toArray(new String[clientes.size()]);
-                ArrayAdapter<String> adapterClientes = new ArrayAdapter<String>(c, android.R.layout.simple_spinner_dropdown_item, itemsClientes);
-                spinnerCliente.setAdapter(adapterClientes);
-            }
-        });
         ReservaViewModel viewModel = ViewModelProviders.of(c, new ReservaViewModelFactory())
                 .get(ReservaViewModel.class);
         Cliente clienteReserva = (Cliente)spinnerCliente.getSelectedItem();
-        reservaPost = gatherFieldsReserva(clienteReserva.getId(),String.valueOf(spinnerBicicleta.getSelectedItem()));
+        Bicicleta bicicletaReserva = (Bicicleta)spinnerBicicleta.getSelectedItem();
+        reservaPost = gatherFieldsReserva(clienteReserva.getId(),bicicletaReserva.getId());
         if (reservaPost == null) {
             Toast.makeText(c, "Por favor revise que la fecha y/o horas " +
                     "correspondan", Toast.LENGTH_LONG).show();
@@ -367,26 +350,27 @@ public class CustomDialogReserva extends Dialog implements
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             viewModel.obtenerReservaActiva(reservaPost.getIdCliente());
+                            viewModel.ObservarReservaActiva().observe(c, new Observer<Reserva>() {
+                                @Override
+                                public void onChanged(@Nullable Reserva reserva) {
+                                    if (reserva == null || !reserva.isActiva()) {
+                                        viewModel.CrearReserva(reservaPost);
+                                        viewModel.ObservarReservaActiva().removeObserver(this);
+                                    } else {
+                                        Toast.makeText(c, "No se ha podido reservar debido a " +
+                                                "que ya tiene una reserva activa. El " +
+                                                reserva.getFecha() + " a las " + reserva.getHoraInicio() + " " +
+                                                "hasta las " + reserva.getHoraFin(), Toast.LENGTH_LONG).show();
+                                    }
+                                }
+                            });
                         }
                     })
                     .setNegativeButton("No", null)
                     .show();
         }
 
-        viewModel.ObservarReservaActiva().observe(c, new Observer<Reserva>() {
-            @Override
-            public void onChanged(@Nullable Reserva reserva) {
-                if (reserva == null || !reserva.isActiva()) {
-                    viewModel.CrearReserva(reservaPost);
-                    viewModel.ObservarReservaActiva().removeObserver(this);
-                } else {
-                    Toast.makeText(c, "No se ha podido reservar debido a " +
-                            "que ya tiene una reserva activa. El " +
-                            reserva.getFecha() + " a las " + reserva.getHoraInicio() + " " +
-                            "hasta las " + reserva.getHoraFin(), Toast.LENGTH_LONG).show();
-                }
-            }
-        });
+
 
         viewModel.ObservarReservaCreada().observe(c, new Observer<Reserva>() {
             @Override
@@ -403,6 +387,53 @@ public class CustomDialogReserva extends Dialog implements
                     c.getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                             new ReservasFragment()).commit();
                 }
+            }
+        });
+    }
+
+    private void CargarSpinners() {
+        EstacionViewModel viewModelE = ViewModelProviders.of(c, new EstacionViewModelFactory())
+                .get(EstacionViewModel.class);
+        viewModelE.ObtenerEstaciones();
+        viewModelE.ObservarEstaciones().observe(c, new Observer<List<Estacion>>() {
+            @Override
+            public void onChanged(@Nullable List<Estacion> estaciones) {
+                estacionesSpinner = estaciones;
+                ArrayAdapter<Estacion> adapterEstaciones = new ArrayAdapter<Estacion>(c, android.R.layout.simple_spinner_dropdown_item, estaciones);
+                spinnerEstacion.setAdapter(adapterEstaciones);
+            }
+        });
+        spinnerEstacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                BicicletaViewModel viewModelR = ViewModelProviders.of(c, new BicicletaViewModelFactory())
+                        .get(BicicletaViewModel.class);
+                Estacion estacion = (Estacion)spinnerEstacion.getSelectedItem();
+                viewModelR.ObtenerBicisByEstacion(estacion.getId());
+                viewModelR.ObservarBicicletasByEstacion().observe(c, new Observer<List<Bicicleta>>() {
+                    @Override
+                    public void onChanged(@Nullable List<Bicicleta> bicicletas) {
+                        bicicletasSpinner = bicicletas;
+                        ArrayAdapter<Bicicleta> adapterBicicletas = new ArrayAdapter<Bicicleta>(c, android.R.layout.simple_spinner_dropdown_item, bicicletas);
+                        spinnerBicicleta.setAdapter(adapterBicicletas);
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        ClienteViewModel viewModelC = ViewModelProviders.of(c, new ClienteViewModelFactory())
+                .get(ClienteViewModel.class);
+        viewModelC.ObtenerClientes();
+        viewModelC.ObservarClientes().observe(c, new Observer<List<Cliente>>() {
+            @Override
+            public void onChanged(@Nullable List<Cliente> clientes) {
+                clientesSpinner = clientes;
+                ArrayAdapter<Cliente> adapterClientes = new ArrayAdapter<Cliente>(c, android.R.layout.simple_spinner_dropdown_item, clientes);
+                spinnerCliente.setAdapter(adapterClientes);
             }
         });
     }
@@ -435,7 +466,8 @@ public class CustomDialogReserva extends Dialog implements
         ReservaViewModel viewModel = ViewModelProviders.of(c, new ReservaViewModelFactory())
                 .get(ReservaViewModel.class);
         Cliente clienteReserva = (Cliente)spinnerCliente.getSelectedItem();
-        reservaPost = gatherFieldsReserva(clienteReserva.getId(),String.valueOf(spinnerBicicleta.getSelectedItem()));
+        Bicicleta bicicletaReserva = (Bicicleta) spinnerBicicleta.getSelectedItem();
+        reservaPost = gatherFieldsReserva(clienteReserva.getId(),bicicletaReserva.getId());
         if (reservaPost == null) {
             Toast.makeText(c, "Por favor revise que la fecha y/o horas " +
                     "correspondan", Toast.LENGTH_LONG).show();

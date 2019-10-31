@@ -21,4 +21,9 @@
         android:icon="@drawable/ic_station"
         android:title="@string/title_estaciones" />
 
+    <item
+        android:id="@+id/navigation_candados"
+        android:icon="@drawable/ic_https_black_24dp"
+        android:title="@string/title_candados" />
+
 </menu>

@@ -4,6 +4,7 @@
     <string name="title_dashboard">Bicicletas</string>
     <string name="title_notifications">Usuarios</string>
     <string name="title_estaciones">Estaciones</string>
+    <string name="title_candados">Candados</string>
 
     <string name="menu_home">Crear Reserva</string>
     <string name="menu_dashboard">Crear Bicicleta</string>

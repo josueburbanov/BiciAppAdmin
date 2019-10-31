@@ -39,7 +39,7 @@ public class ClientesFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        prgBarLoading = getActivity().findViewById(R.id.progressBarEstaciones);
+        prgBarLoading = getActivity().findViewById(R.id.progressBar);
         prgBarLoading.setVisibility(View.VISIBLE);
         viewModel = ViewModelProviders.of(getActivity(), new ClienteViewModelFactory())
                 .get(ClienteViewModel.class);

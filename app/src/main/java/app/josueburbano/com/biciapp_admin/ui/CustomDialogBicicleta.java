@@ -55,7 +55,7 @@ public class CustomDialogBicicleta extends Dialog implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.fragment_nuevo_cliente);
+        setContentView(R.layout.fragment_nueva_bicicleta);
         yes = (LoadingButton) findViewById(R.id.btnAceptar);
         yes.setOnClickListener(this);
 
