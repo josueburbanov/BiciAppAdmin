@@ -51,8 +51,9 @@
             android:spinnerMode="dialog"
             android:textSize="14sp" />
 
+
         <TextView
-            android:id="@+id/textViewTituloPin"
+            android:id="@+id/textViewTituloBiciCandado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pin"
@@ -62,31 +63,8 @@
             android:textStyle="bold"
             android:layout_below="@id/spinnerEstaciones"/>
 
-        <EditText
-                android:id="@+id/editTextPin"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:ems="10"
-            android:hint="3"
-            android:inputType="textPersonName"
-            android:textSize="14sp"
-            android:layout_below="@id/textViewTituloPin"/>
-
-        <TextView
-            android:id="@+id/textViewTituloBiciCandado"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Bicicleta Asociada de ser el caso (Opcional)"
-            android:textColor="@android:color/background_light"
-            android:paddingLeft="32dp"
-            android:paddingTop="32dp"
-            android:textStyle="bold"
-            android:layout_below="@id/editTextPin"/>
-
         <Spinner
-            android:id="@+id/spinnerBicicletas"
+            android:id="@+id/spinnerPines"
             android:layout_width="340dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewTituloBiciCandado"
@@ -113,7 +91,7 @@
             app:lb_buttonColor="#E0F2F1"
             app:lb_isCircular="false"
             app:lb_isShadowEnable="false"
-            android:layout_below="@id/spinnerBicicletas"/>
+            android:layout_below="@id/spinnerPines"/>
 
     </RelativeLayout>
 </ScrollView>

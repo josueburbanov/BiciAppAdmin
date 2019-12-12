@@ -20,6 +20,8 @@ public interface IServicioBicicletas {
     @POST("/BicicletasServicio.svc/bicicletas/nueva")
     Call<Bicicleta> crearBicicleta(@Body JsonObject body);
 
+
+
     @PUT("/BicicletasServicio.svc/bicicletas")
     Call<Boolean> editarBicicleta(@Body JsonObject body);
 
@@ -28,4 +30,6 @@ public interface IServicioBicicletas {
 
     @GET("/BicisCandadosServicio.svc/bicisCandados/estacion/{idEstacion}/bicis/disponibles")
     Call<List<Bicicleta>> obtenerBicisByEstacion(@Path("idEstacion") String idEstacion);
+
+
 }

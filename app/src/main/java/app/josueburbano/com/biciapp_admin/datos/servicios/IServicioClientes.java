@@ -15,7 +15,8 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface IServicioClientes {
-    public static final String BASE_URL = "http:/192.168.100.105:45455";
+    public static final String BASE_URL = "http://172.29.173.202:45457/";
+    //public static final String BASE_URL = "http://ec2-34-217-59-122.us-west-2.compute.amazonaws.com/";
 
     @POST("/ClientesServicio.svc/clientes/authentication")
     public Call<Cliente> obtenerClienteLogueado(@Query("usuario") String usuario, @Query("passw")String passw);

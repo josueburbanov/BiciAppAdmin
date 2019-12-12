@@ -28,9 +28,15 @@ public interface IServicioCandados {
     @DELETE("/CandadosServicio.svc/candados/{idCandado}")
     Call<Boolean> eliminarCandado(@Path("idCandado")String idCandado);
 
-    @POST("/BiciCandadosServicio.svc/biciCandados")
+    @POST("/BicisCandadosServicio.svc/biciCandados")
     Call<BiciCandado> registrarBiciCandado(@Body JsonObject body);
 
-    @GET("/bicisCandados/biciCandadoActual?candado={idCandado}")
+    @GET("/BicisCandadosServicio.svc/bicisCandados/biciCandadoActual?candado={idCandado}")
     Call<BiciCandado> obtenerRegistro(String idCandado);
+
+    @GET("CandadosServicio.svc/candados/estacion/pinesDisponibles/{idEstacion}")
+    Call<List<Integer>> obtenerPinesDisponiblesByEstacion(@Path("idEstacion")String idEstacion);
+
+    @GET("/BicisCandadosServicio.svc/bicisCandados/candados/sinEstacion")
+    Call<List<Candado>> obtenerCandadosSinEstacion();
 }

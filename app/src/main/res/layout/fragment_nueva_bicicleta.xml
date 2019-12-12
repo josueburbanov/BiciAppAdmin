@@ -74,6 +74,29 @@
             android:textSize="14sp"
             android:layout_below="@id/textViewTituloCodigo"/>
 
+        <TextView
+            android:id="@+id/textViewTituloBiciCandado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Candado: "
+            android:textColor="@android:color/background_light"
+            android:paddingLeft="32dp"
+            android:paddingTop="32dp"
+            android:textStyle="bold"
+            android:layout_below="@id/editTextCodigo"/>
+
+        <Spinner
+            android:id="@+id/spinnerCandado"
+            android:layout_width="340dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewTituloBiciCandado"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:ems="10"
+            android:spinnerMode="dialog"
+            android:textSize="14sp" />
+
         <com.kusu.library.LoadingButton
             android:id="@+id/btnAceptar"
             android:layout_width="146dp"
@@ -89,7 +112,7 @@
             app:lb_buttonColor="#E0F2F1"
             app:lb_isCircular="false"
             app:lb_isShadowEnable="false"
-            android:layout_below="@id/editTextCodigo"/>
+            android:layout_below="@id/spinnerCandado"/>
 
     </RelativeLayout>
 </ScrollView>

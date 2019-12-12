@@ -26,15 +26,19 @@ import java.util.List;
 
 import app.josueburbano.com.biciapp_admin.R;
 import app.josueburbano.com.biciapp_admin.datos.modelos.Bicicleta;
+import app.josueburbano.com.biciapp_admin.datos.modelos.Candado;
 import app.josueburbano.com.biciapp_admin.datos.modelos.Cliente;
 import app.josueburbano.com.biciapp_admin.datos.modelos.Estacion;
 import app.josueburbano.com.biciapp_admin.datos.modelos.Reserva;
 import app.josueburbano.com.biciapp_admin.ui.CustomDialogBicicleta;
+import app.josueburbano.com.biciapp_admin.ui.CustomDialogCandado;
 import app.josueburbano.com.biciapp_admin.ui.CustomDialogCliente;
 import app.josueburbano.com.biciapp_admin.ui.CustomDialogEstacion;
 import app.josueburbano.com.biciapp_admin.ui.CustomDialogReserva;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.BicicletaViewModel;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.BicicletaViewModelFactory;
+import app.josueburbano.com.biciapp_admin.ui.ViewModels.CandadoViewModel;
+import app.josueburbano.com.biciapp_admin.ui.ViewModels.CandadoViewModelFactory;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.ClienteViewModel;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.ClienteViewModelFactory;
 import app.josueburbano.com.biciapp_admin.ui.ViewModels.EstacionViewModel;
@@ -111,6 +115,18 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
                 list4.add((String) addInfo2.invoke(item));
             }
         }
+
+        else if(typeKey == Candado.class){
+            for (T item : list) {
+                list1.add(item.toString());
+                Method addInfo1 = Candado.class.getMethod("addInfo1");
+                Method addInfo2 = Candado.class.getMethod("addInfo2");
+                Method getId = Candado.class.getMethod("getId");
+                list2.add((String) addInfo1.invoke(item));
+                list3.add((String) getId.invoke(item));
+                list4.add((String) addInfo2.invoke(item));
+            }
+        }
     }
 
     public MyCustomAdapter(Context context, FragmentActivity activity) {
@@ -182,7 +198,13 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
                     cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
                     cdd.bicicleta = (Bicicleta) list.get(position);
                     cdd.show();
-                }else if(typeKey.equals(Reserva.class)){
+                }else if(typeKey.equals(Candado.class)){
+                    CustomDialogCandado cdd=new CustomDialogCandado(activity);
+                    cdd.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    cdd.candado = (Candado) list.get(position);
+                    cdd.show();
+                }
+                else if(typeKey.equals(Reserva.class)){
                     Reserva reserva = (Reserva) list.get(position);
                     if(reserva.isActiva()){
                         CustomDialogReserva cdd=new CustomDialogReserva(activity);
@@ -193,9 +215,7 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
                         Toast.makeText(context, "Reserva inactiva no se puede eliminar",
                                 Toast.LENGTH_SHORT).show();
                     }
-
                 }
-
                 notifyDataSetChanged();
             }
         });
@@ -225,8 +245,12 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
                             RemoveBicicleta(item, position);
                         }else if(typeKey.equals(Reserva.class)) {
                             RemoveReserva(item, position);
+                        }else if(typeKey.equals(Candado.class)){
+                            RemoveCandado(item, position);
                         }
                     }
+
+
                 });
 
         // set a negative/no button and create a listener
@@ -331,10 +355,30 @@ public class MyCustomAdapter<T> extends BaseAdapter implements ListAdapter {
                             list3.remove(position);
                             notifyDataSetChanged();
                         }
-
-
                     }
                 }
             }});
     }
+
+    private void RemoveCandado(String idItem, int position) {
+        CandadoViewModel viewModel= ViewModelProviders.of(activity, new CandadoViewModelFactory())
+                .get(CandadoViewModel.class);
+        viewModel.EliminarCandado(idItem);
+        viewModel.ObservarConfirmacion().observe(activity, new Observer<Boolean>() {
+            @Override
+            public void onChanged(@Nullable Boolean confirmacion) {
+                if (confirmacion != null) {
+                    if (confirmacion) {
+                        Toast.makeText(context, "Candado eliminado",
+                                Toast.LENGTH_SHORT).show();
+                        if (list.size() > position) {
+                            list.remove(position);
+                            list2.remove(position);
+                            list3.remove(position);
+                            notifyDataSetChanged();
+                        }
+                    }
+                }
+            }});
     }
+}

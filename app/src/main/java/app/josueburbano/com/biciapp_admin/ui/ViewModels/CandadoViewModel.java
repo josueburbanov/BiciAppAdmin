@@ -16,6 +16,7 @@ public class CandadoViewModel extends ViewModel {
     private LiveData<List<Candado>> candados;
     private LiveData<BiciCandado> registroCreado;
     private LiveData<BiciCandado> registro;
+    private LiveData<List<Integer>> pinesDisponibles;
 
     public CandadoViewModel(CandadosRepo candadosRepo){
         this.candadosRepo = candadosRepo;
@@ -24,8 +25,12 @@ public class CandadoViewModel extends ViewModel {
         this.candados = candadosRepo.getCandados();
         this.registro = candadosRepo.getRegistro();
         this.registroCreado = candadosRepo.getRegistroCreado();
+        this.pinesDisponibles = candadosRepo.getPinesDisponibles();
     }
 
+    public void ObtenerPinesDisponibles(String idEstacion){
+        pinesDisponibles = candadosRepo.obtenerPinesDisponiblesByEstacion(idEstacion);
+    }
     public void CrearCandado(Candado candado){
         this.candado = candadosRepo.crearCandado(candado);
     }
@@ -35,6 +40,10 @@ public class CandadoViewModel extends ViewModel {
     public void ObtenerCandados(){
         this.candados = candadosRepo.obtenerCandados();
     }
+    public void ObtenerCandadosSinEstacion(){
+        this.candados = candadosRepo.obtenerCandadosSinEstacion();
+    }
+
     public void EliminarCandado(String idItem) {
         this.confirmacion = candadosRepo.eliminarCandado(idItem);
     }
@@ -53,6 +62,7 @@ public class CandadoViewModel extends ViewModel {
     public LiveData<List<Candado>> ObservarCandados(){return candados;}
     public LiveData<BiciCandado> ObservarRegistroCreado(){return registroCreado;}
     public LiveData<BiciCandado> ObservarRegistro(){return registro;}
+    public LiveData<List<Integer>> ObservarPinesDisponibles(){return pinesDisponibles;}
 
 
 

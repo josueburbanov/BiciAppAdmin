@@ -51,7 +51,7 @@ public class CandadosFragment extends Fragment {
             public void onChanged(@Nullable List<Candado> candados) {
                 if (candados != null) {
                     if(candados.size()==0){
-                        Toast.makeText(getActivity().getApplication(),
+                        Toast.makeText(getActivity(),
                                 "Sin candados", Toast.LENGTH_SHORT);
                     }
                     prgBarLoading.setVisibility(View.INVISIBLE);
