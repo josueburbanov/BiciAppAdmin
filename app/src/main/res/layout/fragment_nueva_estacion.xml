@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.MainActivity"
+    tools:context="app.admin.com.biciapp_admin.ui.MainActivity"
     android:background="@drawable/curve_shap"
     >
 

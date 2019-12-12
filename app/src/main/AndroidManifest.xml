@@ -15,7 +15,7 @@
         android:usesCleartextTraffic="true"
         >
 
-        <activity android:name=".ui.LoginActivity">
+        <activity android:name="app.admin.com.biciapp_admin.ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"
                     android:windowSoftInputMode="stateVisible|adjustResize"/>
@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity"
+        <activity android:name="app.admin.com.biciapp_admin.ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
     </application>
