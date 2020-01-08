@@ -42,7 +42,7 @@ import app.admin.com.biciapp_admin.ui.ViewModels.EstacionViewModel;
 import app.admin.com.biciapp_admin.ui.ViewModels.EstacionViewModelFactory;
 import app.admin.com.biciapp_admin.ui.ViewModels.ReservaViewModel;
 import app.admin.com.biciapp_admin.ui.ViewModels.ReservaViewModelFactory;
-import app.josueburbano.com.biciapp_admin.R;
+import app.admin.com.biciapp_admin.R;
 import app.admin.com.biciapp_admin.ui.ViewModels.CandadoViewModel;
 import app.admin.com.biciapp_admin.ui.ViewModels.ClienteViewModel;
 

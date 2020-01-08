@@ -30,7 +30,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.TranslateAnimation;
 import android.widget.EditText;
 
-import app.josueburbano.com.biciapp_admin.R;
+import app.admin.com.biciapp_admin.R;
 import app.admin.com.biciapp_admin.datos.modelos.Cliente;
 
 

@@ -23,7 +23,7 @@ import java.util.stream.IntStream;
 import app.admin.com.biciapp_admin.ui.ViewModels.BicicletaViewModel;
 import app.admin.com.biciapp_admin.ui.ViewModels.BicicletaViewModelFactory;
 import app.admin.com.biciapp_admin.ui.ViewModels.CandadoViewModelFactory;
-import app.josueburbano.com.biciapp_admin.R;
+import app.admin.com.biciapp_admin.R;
 import app.admin.com.biciapp_admin.datos.modelos.BiciCandado;
 import app.admin.com.biciapp_admin.datos.modelos.Bicicleta;
 import app.admin.com.biciapp_admin.datos.modelos.Candado;

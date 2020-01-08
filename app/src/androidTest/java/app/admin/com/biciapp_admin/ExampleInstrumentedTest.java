@@ -1,4 +1,4 @@
-package app.josueburbano.com.biciapp_admin;
+package app.admin.com.biciapp_admin;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

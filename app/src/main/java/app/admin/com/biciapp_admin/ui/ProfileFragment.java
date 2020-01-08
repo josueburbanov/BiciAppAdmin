@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import app.josueburbano.com.biciapp_admin.R;
+import app.admin.com.biciapp_admin.R;
 
 public class ProfileFragment extends Fragment {
     @Nullable

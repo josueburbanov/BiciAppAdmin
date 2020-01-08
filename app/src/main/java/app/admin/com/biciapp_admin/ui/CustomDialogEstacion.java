@@ -16,7 +16,7 @@ import com.kusu.library.LoadingButton;
 
 import app.admin.com.biciapp_admin.ui.ViewModels.EstacionViewModel;
 import app.admin.com.biciapp_admin.ui.ViewModels.EstacionViewModelFactory;
-import app.josueburbano.com.biciapp_admin.R;
+import app.admin.com.biciapp_admin.R;
 import app.admin.com.biciapp_admin.datos.modelos.Estacion;
 
 public class CustomDialogEstacion extends Dialog implements

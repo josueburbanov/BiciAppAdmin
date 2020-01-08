@@ -20,7 +20,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 import app.admin.com.biciapp_admin.ui.ViewModels.CandadoViewModelFactory;
-import app.josueburbano.com.biciapp_admin.R;
+import app.admin.com.biciapp_admin.R;
 import app.admin.com.biciapp_admin.datos.MyCustomAdapter;
 import app.admin.com.biciapp_admin.datos.modelos.Candado;
 import app.admin.com.biciapp_admin.ui.ViewModels.CandadoViewModel;

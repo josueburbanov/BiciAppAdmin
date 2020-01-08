@@ -21,7 +21,7 @@ import java.util.List;
 
 import app.admin.com.biciapp_admin.ui.ViewModels.BicicletaViewModel;
 import app.admin.com.biciapp_admin.ui.ViewModels.BicicletaViewModelFactory;
-import app.josueburbano.com.biciapp_admin.R;
+import app.admin.com.biciapp_admin.R;
 import app.admin.com.biciapp_admin.datos.MyCustomAdapter;
 import app.admin.com.biciapp_admin.datos.modelos.Bicicleta;
 
